@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Utilities.ConsoleApp
 {
-    public class CustomIntervalAppointmentConfigurarion
+    public static class CustomIntervalAppointmentConfigurarion
     {
         public static List<DateTime> GetNextDates(DateTime startConfigurationDate,
             DateTime actualInitialDate,
@@ -40,21 +40,24 @@ namespace Utilities.ConsoleApp
             DateTime actualEndDate,
             int timesInMonths)
         {
-            var diffMonths = ((actualInitialDate.Year - startConfigurationDate.Year) * 12) + actualInitialDate.Month - startConfigurationDate.Month;
-
-            var diffDays = startConfigurationDate.Day - actualInitialDate.Day;
-            
-            if (diffDays > 0)
-            {
-                actualInitialDate = actualInitialDate.AddDays(diffDays);
-            }            
-
+            var diffMonths = ((actualInitialDate.Year - startConfigurationDate.Year) * 12) + actualInitialDate.Month - startConfigurationDate.Month;               
+           
             var lastDateSelected = actualInitialDate.AddMonths(-(diffMonths % timesInMonths));
-            
+
             var nextDates = new List<DateTime>();            
 
             while (lastDateSelected >= actualInitialDate && lastDateSelected <= actualEndDate)
             {
+                try
+                {
+                    lastDateSelected = new DateTime(lastDateSelected.Year, lastDateSelected.Month, startConfigurationDate.Day);
+                }
+                catch
+                {
+                    lastDateSelected = lastDateSelected.AddMonths(timesInMonths);
+                    continue;
+                }             
+
                 nextDates.Add(lastDateSelected);
                 lastDateSelected = lastDateSelected.AddMonths(timesInMonths);
             }

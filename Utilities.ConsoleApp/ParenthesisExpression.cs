@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Utilities.ConsoleApp
 {
-    internal class ParentesesExpression
+    public class ParenthesisExpression
     {
         public static bool Verify(string input)
         {
