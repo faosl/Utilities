@@ -13,6 +13,11 @@ namespace Utilities.ConsoleApp
             DateTime actualEndDate,
             int timesInDays)
         {
+            if (actualInitialDate < startConfigurationDate)
+            {
+                actualInitialDate = startConfigurationDate;
+            }
+
             var diffDays = (actualInitialDate - startConfigurationDate).TotalDays;
 
             var dayForNextDate = timesInDays - (diffDays % timesInDays);
@@ -40,6 +45,12 @@ namespace Utilities.ConsoleApp
             DateTime actualEndDate,
             int timesInMonths)
         {
+
+            if (actualInitialDate < startConfigurationDate)
+            {
+                actualInitialDate = startConfigurationDate;
+            }
+
             var diffMonths = ((actualInitialDate.Year - startConfigurationDate.Year) * 12) + actualInitialDate.Month - startConfigurationDate.Month;               
            
             var lastDateSelected = actualInitialDate.AddMonths(-(diffMonths % timesInMonths));

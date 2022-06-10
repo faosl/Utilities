@@ -27,6 +27,17 @@ namespace Utilities.ConsoleApp.Test.Data
             {
 
             }};
+
+            yield return new object[] { new DateTime(2022, 05, 04), new DateTime(2022, 05, 01), new DateTime(2022, 05, 07), 3, new List<DateTime>()
+            {
+                new DateTime(2022,05,04),
+                new DateTime(2022,05,07),
+            }};
+
+            yield return new object[] { new DateTime(2022, 06, 04), new DateTime(2022, 06, 05), new DateTime(2022, 06, 11), 7, new List<DateTime>()
+            {
+                new DateTime(2022,06,11),
+            }};
         }
     }
 }
